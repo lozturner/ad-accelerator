@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ad Accelerator — Don't Block. Accelerate.</title>
+<meta name="description" content="A browser extension that mutes and fast-forwards video ads instead of blocking them. Creators get paid. You get your time back.">
+<meta property="og:title" content="Ad Accelerator — Don't Block. Accelerate.">
+<meta property="og:description" content="Mute and fast-forward ads. Creators still get paid. You get your time back.">
+<meta property="og:type" content="website">
+<style>
+  /* ── Reset & Base ──────────────────────────────────────────────── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --amber: #f59e0b;
+    --amber-dark: #d97706;
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface-2: #1a1a1a;
+    --border: #222;
+    --text: #e5e5e5;
+    --text-muted: #888;
+    --text-dim: #555;
+    --radius: 12px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--amber); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Layout ────────────────────────────────────────────────────── */
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── Hero ──────────────────────────────────────────────────────── */
+  .hero {
+    text-align: center;
+    padding: 80px 0 60px;
+  }
+
+  .hero-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    background: var(--amber);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-icon svg {
+    width: 44px;
+    height: 44px;
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 6vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 span {
+    color: var(--amber);
+  }
+
+  .hero .tagline {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.5;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--amber);
+    color: #111;
+  }
+
+  .btn-primary:hover {
+    background: var(--amber-dark);
+    text-decoration: none;
+  }
+
+  .btn-secondary {
+    background: var(--surface-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    background: #222;
+    text-decoration: none;
+  }
+
+  /* ── How It Works ──────────────────────────────────────────────── */
+  .section {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .step {
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .step-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .step h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .step p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Comparison ────────────────────────────────────────────────── */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 540px) {
+    .comparison { grid-template-columns: 1fr; }
+  }
+
+  .compare-card {
+    padding: 24px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+
+  .compare-card.bad {
+    background: #1a0a0a;
+    border-color: #331a1a;
+  }
+
+  .compare-card.good {
+    background: #0a1a0a;
+    border-color: #1a331a;
+  }
+
+  .compare-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .compare-card.bad h3 { color: #ef4444; }
+  .compare-card.good h3 { color: #22c55e; }
+
+  .compare-card ul {
+    list-style: none;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .compare-card li {
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .compare-card.bad li::before {
+    content: '✕';
+    position: absolute;
+    left: 0;
+    color: #ef4444;
+    font-weight: 700;
+  }
+
+  .compare-card.good li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #22c55e;
+    font-weight: 700;
+  }
+
+  /* ── Install ───────────────────────────────────────────────────── */
+  .install-steps {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+
+  .install-steps ol {
+    list-style: none;
+    counter-reset: step;
+  }
+
+  .install-steps li {
+    counter-increment: step;
+    padding: 8px 0 8px 40px;
+    position: relative;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  .install-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--amber);
+  }
+
+  .install-steps code {
+    background: var(--surface-2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--amber);
+  }
+
+  /* ── Footer ────────────────────────────────────────────────────── */
+  footer {
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  footer a {
+    color: var(--text-muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  /* ── Divider ───────────────────────────────────────────────────── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 6L18 16L6 26V6Z" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M16 6L28 16L16 26V6Z" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="round" opacity="0.5"/>
+        </svg>
+      </div>
+      <h1>Don't Block.<br><span>Accelerate.</span></h1>
+      <p class="tagline">A browser extension that mutes and fast-forwards video ads. Creators still get paid. You get your time back.</p>
+      <div class="cta-group">
+        <a href="https://github.com/lozturner/ad-accelerator" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          Get it on GitHub
+        </a>
+        <a href="#install" class="btn btn-secondary">Install Guide</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- How It Works -->
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">🎯</div>
+          <h3>Detects Ads</h3>
+          <p>Watches for ad markers on YouTube and Twitch — no network interception needed</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">🔇</div>
+          <h3>Mutes Audio</h3>
+          <p>Instantly silences the ad so you don't hear a thing</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">⚡</div>
+          <h3>Speeds Up</h3>
+          <p>Cranks playback to 2x, 4x, 8x, or 16x — a 30s ad becomes 2s</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">⏭️</div>
+          <h3>Auto-Skips</h3>
+          <p>Clicks the Skip button the instant it appears</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Comparison -->
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">A Better Way</h2>
+      <div class="comparison">
+        <div class="compare-card bad">
+          <h3>Ad Blockers</h3>
+          <ul>
+            <li>Destroy creator revenue</li>
+            <li>Break website functionality</li>
+            <li>Arms race with platforms</li>
+            <li>Guilt-inducing "please whitelist" banners</li>
+          </ul>
+        </div>
+        <div class="compare-card good">
+          <h3>Ad Accelerator</h3>
+          <ul>
+            <li>Creators still get paid</li>
+            <li>Ads still "play" (impression counted)</li>
+            <li>No network interception</li>
+            <li>30s ad becomes a 2s blip</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Install -->
+  <section class="section" id="install">
+    <div class="wrap">
+      <h2 class="section-title">Install in 60 Seconds</h2>
+      <div class="install-steps">
+        <ol>
+          <li>Download or clone the <a href="https://github.com/lozturner/ad-accelerator">GitHub repo</a></li>
+          <li>Open <code>chrome://extensions/</code> in Chrome, Edge, or Brave</li>
+          <li>Enable <strong>Developer mode</strong> (toggle in top right)</li>
+          <li>Click <strong>Load unpacked</strong></li>
+          <li>Select the <code>extension/</code> folder from the download</li>
+          <li>Done — click the ⚡ icon to configure</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-links">
+        <a href="https://github.com/lozturner/ad-accelerator">GitHub</a>
+        <a href="https://github.com/lozturner">Loz Turner</a>
+      </div>
+      <p>MIT License — do whatever you want with it.</p>
+      <p style="margin-top: 8px;">
+        <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">
+          Created with Perplexity Computer
+        </a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

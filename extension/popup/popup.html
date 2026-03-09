@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=350">
+  <title>Ad Accelerator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="#f59e0b"/>
+          <path d="M10 8L22 16L10 24V8Z" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M18 8L30 16L18 24V8Z" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="round" opacity="0.5"/>
+        </svg>
+        <div>
+          <h1>Ad Accelerator</h1>
+          <p class="tagline">Don't block. Accelerate.</p>
+        </div>
+      </div>
+      <div class="toggle-wrap">
+        <label class="toggle" for="enabled">
+          <input type="checkbox" id="enabled" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
+
+    <!-- Status -->
+    <div class="status" id="status">
+      <span class="status-dot"></span>
+      <span class="status-text">Watching for ads...</span>
+    </div>
+
+    <!-- Speed Control -->
+    <section class="section">
+      <label class="section-label">Ad Playback Speed</label>
+      <div class="speed-buttons" id="speedButtons">
+        <button data-speed="2" class="speed-btn">2x</button>
+        <button data-speed="4" class="speed-btn">4x</button>
+        <button data-speed="8" class="speed-btn">8x</button>
+        <button data-speed="16" class="speed-btn active">16x</button>
+      </div>
+    </section>
+
+    <!-- Options -->
+    <section class="section">
+      <label class="section-label">Options</label>
+      <div class="option-row">
+        <div>
+          <span class="option-label">Mute ads</span>
+          <span class="option-desc">Silence audio during ads</span>
+        </div>
+        <label class="toggle" for="muteAds">
+          <input type="checkbox" id="muteAds" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="option-row">
+        <div>
+          <span class="option-label">Auto-skip</span>
+          <span class="option-desc">Click "Skip" when it appears</span>
+        </div>
+        <label class="toggle" for="autoSkip">
+          <input type="checkbox" id="autoSkip" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="option-row">
+        <div>
+          <span class="option-label">Minimize ad visuals</span>
+          <span class="option-desc">Fade out the ad overlay</span>
+        </div>
+        <label class="toggle" for="hideAd">
+          <input type="checkbox" id="hideAd">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="section stats">
+      <div class="stat">
+        <span class="stat-value" id="adsAccelerated">0</span>
+        <span class="stat-label">Ads accelerated</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="timeSaved">0s</span>
+        <span class="stat-label">Time saved</span>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Creators still get paid. You get your time back.</p>
+      <a href="https://github.com/lozturner/ad-accelerator" target="_blank" rel="noopener">GitHub</a>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
