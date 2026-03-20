@@ -142,6 +142,7 @@
     state.originalMuted = video.muted;
     state.originalVolume = video.volume;
     state.adActive = true;
+    state.adStartTime = Date.now();
 
     applyAdMode();
 
@@ -162,7 +163,29 @@
       state.skipCheckInterval = null;
     }
 
+    // Track stats: how many ads accelerated, time saved
+    trackAdCompleted();
+
     restoreNormal();
+  }
+
+  // ── Analytics: track usage stats locally ──────────────────────────────
+  function trackAdCompleted() {
+    const elapsed = (Date.now() - (state.adStartTime || Date.now())) / 1000;
+    // Estimate original ad duration (elapsed * speed = original duration)
+    const estimatedOriginal = elapsed * config.speed;
+    const timeSaved = Math.max(0, estimatedOriginal - elapsed);
+
+    if (typeof chrome !== 'undefined' && chrome.storage) {
+      chrome.storage.sync.get({ adsAccelerated: 0, timeSaved: 0 }, (items) => {
+        chrome.storage.sync.set({
+          adsAccelerated: (items.adsAccelerated || 0) + 1,
+          timeSaved: Math.round((items.timeSaved || 0) + timeSaved)
+        });
+      });
+    }
+
+    log(`Ad completed — ~${timeSaved.toFixed(1)}s saved (${elapsed.toFixed(1)}s at ${config.speed}x)`);
   }
 
   // ── Main loop: observe the player for ad transitions ─────────────────
